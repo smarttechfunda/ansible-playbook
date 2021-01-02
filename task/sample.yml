@@ -1,5 +1,7 @@
---- # This is sample.yml file and execute the
+--- 
+# This is sample.yml file and execute the
 # commands ansible --version, hostname, and hostname -I on the instance.
+# The host1 is group of hosts (group of IPs, hostnames) which is specified in the hosts file in the task folder
 - hosts: host1
   tasks:
     - name: Example-1 Print Message
