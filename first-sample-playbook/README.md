@@ -3,7 +3,7 @@ Check the following link to create playbook structure, write and execute the ans
 <a href="https://smarttechfunda.com/ansible-basic-commands/">First sample palybook</a>
 
 Download the repository and run the following command to execute the playbook </br>
-Command:</br>
+<h4>Command:</h4></br>
 ansible-playbook -i hosts sample.yml
 
 <h3>Note:</h3>
