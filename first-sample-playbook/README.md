@@ -7,6 +7,6 @@ Command:</br>
 ansible-playbook -i hosts sample.yml
 
 <h3>Note:</h3>
-Check the following link to install the ansible.</br>
+Check the following link to install the ansible and basic commands.</br>
 <a href="https://smarttechfunda.com/automate-the-installation-of-ansible-on-centos-8/">Install ansible</a> </br>
 <a href="https://smarttechfunda.com/ansible-basic-commands/">Ansible Basic commands</a>
