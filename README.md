@@ -1,2 +1,7 @@
 # ansible-playbook
 The ansible-playbook repository contains from simple ansible-playbook to advance.
+
+<h3>Note:</h3>
+Check the following link to install the ansible.</br>
+<a href="https://smarttechfunda.com/automate-the-installation-of-ansible-on-centos-8/">Install ansible</a> </br>
+<a href="https://smarttechfunda.com/ansible-basic-commands/">Ansible Basic commands</a>
