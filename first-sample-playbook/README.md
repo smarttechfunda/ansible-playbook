@@ -1,6 +1,6 @@
 # First Sample Playbook
 Check the following link to create playbook structure, write and execute the ansible playbook.</br>
-<a href="https://smarttechfunda.com/ansible-basic-commands/">First sample palybook</a>
+<a href="https://smarttechfunda.com/ansible-first-playbook/">First sample palybook</a>
 
 Download the repository and run the following command to execute the playbook.
 <h4>Command:</h4>
