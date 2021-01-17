@@ -9,5 +9,5 @@ ansible-playbook -i hosts install-pkgs.yml
 <h3>Note:</h3>
 Check the following link to install the ansible and basic commands.</br>
 <a href="https://smarttechfunda.com/automate-the-installation-of-ansible-on-centos-8/">Install ansible</a> </br>
-<a href="https://smarttechfunda.com/ansible-basic-commands/">Ansible Basic commands</a>
-<a href="https://smarttechfunda.com/ansible-first-playbook/">Ansible First Playbook</a> </br>
+<a href="https://smarttechfunda.com/ansible-basic-commands/">Ansible Basic commands</a> </br>
+<a href="https://smarttechfunda.com/ansible-first-playbook/">Ansible First Playbook</a>
