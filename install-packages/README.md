@@ -1,6 +1,6 @@
 # Ansible Playbook Install epel-release, Nginx, net-tools Packages
 Check the following link to create playbook structure, write and execute the ansible playbook.</br>
-<a href="https://smarttechfunda.com/packages-installation-using-ansible-playbook/">First sample palybook</a>
+<a href="https://smarttechfunda.com/packages-installation-using-ansible-playbook/">Ansible Playbook Install epel-release, Nginx, net-tools Packages</a>
 
 Download the repository and run the following command to execute the playbook.
 <h4>Command:</h4>
