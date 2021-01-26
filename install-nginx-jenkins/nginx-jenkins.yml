@@ -1,0 +1,143 @@
+---
+# This playbook install jenkins and configured with nginx.
+
+#
+# The following statement means the all hosts in webserver
+# and all hosts in jenkins. Check the hosts file in install-nginx-jenkins folder.
+#
+- hosts: jenkins
+
+  tasks:
+    #
+    # To start the jenkin service after jenkins installation, we need to install the java.
+    # The yum module install java.
+    #
+  - name: Java installation in process...
+    yum:
+      name: java
+    register: java_status
+
+    # The debug module print variable value of java_status.
+  - name: Print the java installation status
+    debug:
+      msg: "Java installation status: {{java_status}}"
+
+    #
+    # The get_url is a module which download the provided URL to the destition (dest)
+    # and assign the permission to the downloaded file.
+    # The linux command is wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    #
+  - name: Downloading Jenkins Repo File...
+    get_url:
+      url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+      dest: /etc/yum.repos.d/jenkins.repo
+      mode: '0644'
+    # The register module store status of get_url module.
+    register: jenkins_repo
+
+    # The debug module print variable value of jenkins_repo.
+  - name: Print Download Jenkins Repo File Status
+    debug:
+      msg: "Downloaded the Jenkins repo file status: {{jenkins_repo}}"
+
+    # Copying the nginx.repo file to the path /etc/yum.repos.d/.
+  - name: Copying nginx.repo file to the path /etc/yum.repos.d/...
+    copy:
+      src: config/nginx.repo
+      dest: /etc/yum.repos.d/
+      mode: '0644'
+    register: copy_nginx_repo
+
+    # The debug module print variable value of copy_nginx_repo.
+  - name: Copy nginx file
+    debug:
+      msg: "Copy nginx.repo file status: {{copy_nginx_repo}}"
+
+    #
+    # The rpm_key is a module, it import the key from the URL.
+    # Linux command to import key from URL: rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+    #
+  - name: Importing the key from a ULR...
+    rpm_key:
+      state: present
+      key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+    # The register module store status of ansible.builtin.rpm_key module.
+    register: jenkins_key
+
+    # The debug module print variable value of jenkins_key.
+  - name: Print Import Key Status
+    debug:
+      msg: "Imported the jenkins key: {{jenkins_key}}"
+
+    #
+    # The yum module install the provided package.
+    # Linux command for to install jenkins: yum install -y jenkins nginx
+    #
+  - name: Jenkins and Nginx installation in process...
+    yum:
+      name: "{{ item }}"
+    loop:
+      - jenkins
+      - nginx
+    register: installation_status
+
+   # The debug module print variable value of installation_status.
+  - name: Print Jenkins and Nginx Installation Status
+    debug:
+      msg: "Jenkins installed: {{installation_status}}"
+
+    # Replace listen 80 default_server; with listen 80; in  /etc/nginx/nginx.conf file.
+  - name: Updating the /etc/nginx/nginx.conf file...
+    shell: sed  -i "s/listen       80 default_server;/listen       80;/g" /etc/nginx/nginx.conf
+
+
+   # Copy jenkins.conf and default.conf to the path /etc/nginx/conf.d/.
+  - name: Copying jenkins.conf file with owner and permissions...
+    copy:
+      src: config/{{ item }}
+      dest: /etc/nginx/conf.d/
+      owner: root
+      group: root
+      mode: '0644'
+    loop:
+      - jenkins.conf
+      - default.conf
+
+    #
+    # The service module enable and start the jenkins, nginx services.
+    # Linux command to enable and start the jenkins and nginx:
+    # systemctl enable jenkins && systemctl start jenkins
+    # systemctl enable nginx && systemctl start nginx
+    #
+  - name: Enable and start the jenkins service...
+    service:
+      name: "{{ item }}"
+      enabled: yes
+      state: started
+    loop:
+      - jenkins
+      - nginx
+    register: service_start_status
+
+    # The debug module print variable value of jenkins_enable_start_status.
+  - name: Print the enable and start status of jenkins
+    debug:
+      msg: "Enable and start jenkins status: {{service_start_status}}"
+
+    #
+    # Enable the port 8080 for Jenkins and service http for nginx in iptables.
+    # Enable the selinux for http.
+    #
+  - name: Enabling jenkins port in iptables...
+    shell: "{{ item }}"
+    loop:
+        - firewall-cmd --permanent --zone=public --add-port=8080/tcp
+        - firewall-cmd --permanent --zone=public --add-service=http
+        - firewall-cmd --reload
+        - setsebool -P httpd_can_network_connect 1
+
+    # The debug module print variable value of ansible_ssh_host which remote host ip.
+  - name: Display the Jenkins URL
+    debug:
+      msg: "Use this URL to configure Jenkins: http://{{ ansible_ssh_host }}"
+

@@ -1,0 +1,21 @@
+- hosts: webserver:jenkins
+
+  tasks:
+
+  - name: Enabling jenkins port in iptables...
+    iptables:
+      chain: INPUT
+      protocol: tcp
+      ctstate: 
+        - NEW
+        - UNTRACKED
+      destination_port: 8080
+      jump: ACCEPT
+    register: jenkins_port_status
+
+  - name: Print the jenkins enable port status
+    debug:
+       msg: "Jenkins port status: {{jenkins_port_status}}"
+
+       #  - name: Save and reload the iptables entry
+       #shell: firewall-cmd --runtime-to-permanent && firewall-cmd --reload      
