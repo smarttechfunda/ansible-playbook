@@ -1,6 +1,6 @@
 # install-nginx-jenkins
 Check the following link to create playbook structure, write and execute the ansible playbook.</br>
-<a href="https://smarttechfunda.com/packages-installation-using-ansible-playbook/">First sample palybook</a>
+<a href="https://smarttechfunda.com/how-to-configure-jenkins-with-nginx-using-ansible-playbook/">Configure Jenkins with Nginx using ansible playbook</a>
 
 Download the repository and run the following command to execute the playbook.
 <h4>Command:</h4>
