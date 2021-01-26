@@ -11,4 +11,5 @@ ansible-playbook -i hosts nginx-jenkins.yml
 Check the following link to install the ansible and basic commands.</br>
 <a href="https://smarttechfunda.com/automate-the-installation-of-ansible-on-centos-8/">Install ansible</a> </br>
 <a href="https://smarttechfunda.com/ansible-basic-commands/">Ansible Basic commands</a> </br>
-<a href="https://smarttechfunda.com/ansible-first-playbook/">Ansible First Playbook</a>
+<a href="https://smarttechfunda.com/ansible-first-playbook/">Ansible First Playbook</a> </br>
+<a href="https://smarttechfunda.com/packages-installation-using-ansible-playbook/">Install Packages</a>
